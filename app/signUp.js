@@ -28,7 +28,7 @@ export default function SignUp() {
         }
         setLoading(true);
 
-        let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current);
+        let response = await register(emailRef.current.trim(), passwordRef.current, usernameRef.current.trim(), profileRef.current.trim());
         setLoading(false);
 
         if(!response.success){

@@ -22,7 +22,7 @@ export default function SignIn() {
             return;
         }
         setLoading(true);
-        const response = await login(emailRef.current, passwordRef.current) ;
+        const response = await login(emailRef.current.trim(), passwordRef.current) ;
         setLoading(false);
         if(!response.success){
             Alert.alert('Entrar', response.msg);
