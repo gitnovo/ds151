@@ -1,5 +1,5 @@
-import React from 'react'
 import { View, Text, Pressable } from 'react-native'
+import React from 'react'
 import { useAuth } from '../../context/authContext'
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
     console.log('dados do usuário: ', user);
 
     return (
-        <View>
+        <View className='flex-1 bg-white'>
             <Text>Home</Text>
             <Pressable onPress={handleLogout}>
                 <Text>Sair</Text>
