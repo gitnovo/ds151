@@ -1,0 +1,14 @@
+import { Text, View } from "react-native"
+import React from "react"
+import { useLocalSearchParams } from "expo-router"
+
+export default function ChatRoom(){
+    
+    const item = useLocalSearchParams();
+    //console.log("got item data: ", item);
+    return(
+        <View>
+            <Text>Chat Room</Text>
+        </View>
+    )
+}
