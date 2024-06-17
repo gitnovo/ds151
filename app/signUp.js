@@ -6,9 +6,14 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import Loading from '../components/Loading';
 import CustomKeyboardView from '../components/CustomKeyboardView';
+import { useAuth } from '../context/authContext';
+
+
+
 
 export default function SignUp() {
     const router = useRouter();
+    const { register } = useAuth(); 
     const [loading, setLoading] = useState(false);
 
     const emailRef = useRef("");
@@ -18,10 +23,18 @@ export default function SignUp() {
 
     const handleRegister = async() =>{
         if(!emailRef.current || !passwordRef.current || !usernameRef.current || !profileRef.current){
-            Alert.alert("Cadastrar", "Por favor, preencha todos os campos");
+            Alert.alert("Cadastro de usuário", "Por favor, preencha todos os campos");
             return;
         }
-        //register process
+        setLoading(true);
+
+        let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current);
+        setLoading(false);
+
+        //console.log('consegui resultado: ', response);
+        if(!response.success){
+            Alert.alert('Cadastro de usuário', response.msg);
+        }
     }
     return (
         <CustomKeyboardView>
@@ -33,7 +46,7 @@ export default function SignUp() {
                     </View>
                 
                     <View className="gap-10">
-                        <Text style={{fontSize: hp(4)}}  className="font-bold tracking-wider text-center text-neutral-800" >Cadastre-se</Text>
+                        <Text style={{fontSize: hp(4)}}  className="font-bold tracking-wider text-center text-neutral-800" >Criar uma conta</Text>
                         {/* inputs */}
 
                         <View className="gap-4">
