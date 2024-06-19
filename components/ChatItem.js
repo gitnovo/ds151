@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP} from 'react-native-responsive-screen';
-import { blurhash, getRoomId } from '../utils/common';
+import { blurhash, formatDate, getRoomId } from '../utils/common';
 import { Image } from'expo-image'
 import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -32,9 +32,9 @@ export default function ChatItem({item, router, noBorder, currentUser}){
 
     const renderTime = () => {
         if(lastMessage){
-            console.log('last message time: ', lastMessage?.createdAt);
+            let date = lastMessage?.createdAt;
+            return formatDate(new Date(date?.seconds * 1000));
         }
-        return 'Time';
     }
 
     const renderLastMessage = () =>{
